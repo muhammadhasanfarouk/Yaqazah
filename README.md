@@ -57,8 +57,3 @@
 | **Caching** | Redis | [cite_start]In-memory store for fast retrieval[cite: 66]. |
 | **AI/ML** | TensorFlow Lite | [cite_start]Deployment on mobile devices[cite: 73]. |
 | **Computer Vision** | MediaPipe | [cite_start]Real-time facial landmark detection[cite: 554]. |
-
----
-
-## 📄 License
-[cite_start]This project is a Graduation Project for the Academic Year 2025-2026[cite: 13, 14].
