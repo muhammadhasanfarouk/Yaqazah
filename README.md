@@ -1,45 +1,49 @@
 # Yaqazah - يقظة 🚗💤
 > **Real-time Driver Monitoring & Sleep Prediction System**
 
-[![Flutter](https://img.shields.io/badge/Mobile-Flutter-blue)](https://flutter.dev/)
-[![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot-green)](https://spring.io/projects/spring-boot)
-[![TensorFlow Lite](https://img.shields.io/badge/AI-TFLite-orange)](https://www.tensorflow.org/lite)
-[![PostgreSQL](https://img.shields.io/badge/DB-PostgreSQL-336791)](https://www.postgresql.org/)
+![Flutter](https://img.shields.io/badge/Mobile-Flutter-blue)
+![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot-green)
+![TensorFlow Lite](https://img.shields.io/badge/AI-TFLite-orange)
+![PostgreSQL](https://img.shields.io/badge/DB-PostgreSQL-336791)
 
 ## 📖 Overview
-**Yaqazah** is a cross-platform mobile and web solution designed to tackle the global challenge of driver fatigue and distraction. Unlike traditional systems that require expensive hardware, Yaqazah leverages **computer vision** and **lightweight deep learning** on standard smartphones to monitor driver behavior in real-time.
+[cite_start]**Yaqazah** is a real-time driver monitoring system designed to predict drowsiness using computer vision and lightweight deep learning[cite: 22]. [cite_start]By analyzing facial landmarks and ocular metrics on standard mobile devices, Yaqazah eliminates the need for specialized hardware[cite: 23].
 
-The system shifts the safety paradigm from **reactive detection** (alarming after sleep) to **proactive prevention** (predicting sleepiness before it happens).
+[cite_start]The system shifts the safety paradigm from **reactive detection** to **proactive prevention**, identifying the onset of fatigue before it reaches a critical stage[cite: 24, 53].
 
 ---
 
 ## 🌟 Key Features
 
-### 📱 For Drivers (Mobile App)
-* **Real-Time Monitoring:** Detects drowsiness (closed eyes), distraction (looking away), and yawning using the front-facing camera.
-* **Sleep Prediction:** Uses LSTM models to analyze behavioral trends and predict sleepiness probability before it becomes critical.
-* **Smart Alerts:** Customizable audio, visual, and vibration alerts triggered by safety thresholds.
-* **Offline Capability:** Runs entirely on-device (Edge Computing) to ensure privacy and functionality in low-connectivity areas.
-* **Session Reports:** View driving history and export safety reports (PDF/CSV).
+### 📱 For Drivers (Mobile Application)
+* [cite_start]**Real-Time Monitoring:** Detects drowsiness (eye closure), distraction (looking away), and yawning using the front camera[cite: 143, 144].
+* [cite_start]**Sleep Prediction:** Utilizing LSTM models to capture temporal behavior patterns and predict sleepiness probability[cite: 147, 563].
+* [cite_start]**Smart Alerts:** Customizable alerts (Sound, Visual, Vibration) triggered when safety thresholds are exceeded[cite: 133, 148].
+* [cite_start]**Offline Capability:** Runs deep learning models locally on-device (Edge Computing) without requiring internet connectivity[cite: 32, 74].
+* [cite_start]**Session Reports:** Export driving history and safety reports as PDF or CSV[cite: 136].
 
 ### 💻 For Fleet Managers (Web Dashboard)
-* **Fleet Visibility:** Monitor driver status and identify high-risk behaviors.
-* **Analytics Dashboard:** Visualize daily, weekly, and monthly safety statistics.
-* **Driver Management:** Register drivers, manage profiles, and search fleet records.
+* [cite_start]**Fleet Visibility:** Search for drivers and view fleet-wide statistics[cite: 139, 141].
+* [cite_start]**Analytics Dashboard:** Visualize daily, weekly, and monthly safety data to optimize risk management[cite: 135, 124].
+* [cite_start]**Report Management:** Filter and search reports by date, driver, or alert type[cite: 140].
 
 ---
 
 ## 🏗️ System Architecture
-Yaqazah follows a **Layered Architecture** ensuring modularity and scalability.
+[cite_start]Yaqazah follows a **Layered Architecture**[cite: 105]:
 
-1.  **Presentation Layer:** Flutter (Mobile) & Web Dashboard.
-2.  **Business Logic Layer:** Microservices for Sessions, Users, Analytics, Alerts, and Reporting.
-3.  **Data Layer:** PostgreSQL (Persistent storage) & Redis (Caching).
+1.  [cite_start]**Presentation Layer:** Driver UI (Mobile) and Admin UI (Web)[cite: 106].
+2.  [cite_start]**Business Logic Layer:** Includes Session, User, Analytics, Detection, Alert, and Report services[cite: 109].
+3.  [cite_start]**Data Layer:** Utilizes **PostgreSQL** for persistent storage and **Redis** for caching frequently accessed data[cite: 118, 63, 66].
 
 ### AI Pipeline
-The AI component utilizes a dual-layer approach:
-1.  **Extraction Layer (CV):** Uses **MediaPipe** for facial landmarks (EAR/MAR) and **YOLOv8** for object detection (smoking/phone use).
-2.  **Classification Layer (ML):** Uses **LSTM** (Long Short-Term Memory) networks to capture temporal behavior patterns for accurate sleep prediction.
+[cite_start]The system uses a dual-layer AI approach[cite: 547]:
+1.  **Extraction Layer (CV):**
+    * [cite_start]**MediaPipe:** For real-time facial landmark detection (EAR/MAR)[cite: 554].
+    * [cite_start]**YOLOv8:** For detecting external distractions like phone usage or smoking[cite: 556].
+2.  **Classification Layer (ML):**
+    * [cite_start]**LSTM (Long Short-Term Memory):** Used to remember behavior over time and predict fatigue progression[cite: 563].
+    * [cite_start]**TFLite:** Models are compressed to run efficiently on mobile devices[cite: 73].
 
 ---
 
@@ -47,33 +51,32 @@ The AI component utilizes a dual-layer approach:
 
 | Component | Technology | Description |
 | :--- | :--- | :--- |
-| **Mobile Frontend** | Flutter | Cross-platform UI for Android/iOS. |
-| **Backend** | Spring Boot | Scalable RESTful APIs & business logic. |
-| **Database** | PostgreSQL | Relational database for user & session data. |
-| **Caching** | Redis | In-memory store for fast analytics retrieval. |
-| **AI Inference** | TensorFlow Lite | Lightweight model deployment on mobile. |
-| **Computer Vision** | MediaPipe | Real-time facial landmark detection. |
+| **Mobile Framework** | Flutter | [cite_start]Cross-platform UI for Android/iOS[cite: 57]. |
+| **Backend Framework** | Spring Boot | [cite_start]Scalable RESTful APIs & business logic[cite: 60]. |
+| **Database** | PostgreSQL | [cite_start]Robust relational database[cite: 63]. |
+| **Caching** | Redis | [cite_start]In-memory store for fast retrieval[cite: 66]. |
+| **AI/ML** | TensorFlow Lite | [cite_start]Deployment on mobile devices[cite: 73]. |
+| **Computer Vision** | MediaPipe & YOLOv8 | [cite_start]Facial analysis and object detection[cite: 554, 556]. |
 
 ---
 
 ## 👥 Team
 
-**Faculty of Computing and Artificial Intelligence, Cairo University**
-**Department of Computer Science**
+[cite_start]**Faculty of Computing and Artificial Intelligence, Cairo University** [cite: 1, 2]
+[cite_start]**Department of Computer Science** [cite: 4]
 
 ### Supervised By
-* **Dr. Sabah Sayed**
-* **TA. Amany Mohamed Hesham**
+* **Dr. [cite_start]Sabah Sayed** [cite: 7]
+* **TA. [cite_start]Amany Mohamed Hesham** [cite: 8]
 
 ### Implemented By
-| Name | ID |
-| :--- | :--- |
-| **Yousef Ashraf Showman** | 20221197 |
-| **Touka Mohamed Korany** | 20220094 |
-| **Yasmine Sherif Mohamed** | 20220377 |
-| **Mohamed Aber Hassan** | 20220292 |
-| **Muhammad Hasan Farouk** | 20221120 |
+* [cite_start]**Yousef Ashraf Showman** [cite: 12]
+* [cite_start]**Touka Mohamed Korany** [cite: 12]
+* [cite_start]**Yasmine Sherif Mohamed** [cite: 12]
+* [cite_start]**Mohamed Aber Hassan** [cite: 12]
+* [cite_start]**Muhammad Hasan Farouk** [cite: 12]
 
 ---
 
-## 🚀 Getting
+## 📄 License
+[cite_start]This project is a Graduation Project for the Academic Year 2025-2026[cite: 13, 14].
