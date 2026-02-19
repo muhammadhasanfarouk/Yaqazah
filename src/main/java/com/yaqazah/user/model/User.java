@@ -1,4 +1,4 @@
-package com.yaqazah.model;
+package com.yaqazah.user.model;
 
 import jakarta.persistence.*;
 

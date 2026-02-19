@@ -1,11 +1,9 @@
-package com.yaqazah.model;
+package com.yaqazah.user.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
-import java.util.List;
 import java.util.UUID;
 
 // Driver Subclass

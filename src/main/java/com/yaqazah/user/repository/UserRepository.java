@@ -1,6 +1,6 @@
-package com.yaqazah.repository;
+package com.yaqazah.user.repository;
 
-import com.yaqazah.model.User;
+import com.yaqazah.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 import java.util.Optional;

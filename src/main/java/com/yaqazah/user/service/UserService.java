@@ -1,8 +1,8 @@
-package com.yaqazah.service;
+package com.yaqazah.user.service;
 
-import com.yaqazah.repository.UserRepository;
+import com.yaqazah.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.yaqazah.model.User;
+import com.yaqazah.user.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

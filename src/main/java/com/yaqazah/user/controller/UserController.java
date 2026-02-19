@@ -1,13 +1,13 @@
-package com.yaqazah.controller;
+package com.yaqazah.user.controller;
 
-import com.yaqazah.model.Driver;
-import com.yaqazah.service.UserService;
+import com.yaqazah.user.model.Driver;
+import com.yaqazah.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import com.yaqazah.model.User;
+import com.yaqazah.user.model.User;
 
 import java.util.UUID;
 

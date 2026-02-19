@@ -1,4 +1,4 @@
-package com.yaqazah.Configuration;
+package com.yaqazah.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
