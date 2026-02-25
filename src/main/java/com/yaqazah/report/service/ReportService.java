@@ -10,6 +10,8 @@ public class ReportService {
     private DetectionLogRepository logRepo;
 
     public void getLogs() { /* Fetch logs logic */ }
+
     public void generatePDFReport() { /* PDF Gen Logic */ }
+
     public void generateCSVReport() { /* CSV Gen Logic */ }
 }

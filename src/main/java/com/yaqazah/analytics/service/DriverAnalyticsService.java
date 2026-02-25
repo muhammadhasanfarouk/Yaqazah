@@ -4,6 +4,7 @@ import com.yaqazah.detection.model.DetectionLog;
 import com.yaqazah.detection.repository.DetectionLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -15,5 +16,7 @@ public class DriverAnalyticsService implements AnalyticsService {
     @Override
     public void calculateAnalytics(UUID driverId) { /* Logic */ }
 
-    public List<DetectionLog> fetchLogs(UUID driverId) { return null; }
+    public List<DetectionLog> fetchLogs(UUID driverId) {
+        return null;
+    }
 }

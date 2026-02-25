@@ -2,7 +2,9 @@ package com.yaqazah.report.controller;
 
 import com.yaqazah.report.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/reports")
@@ -11,8 +13,12 @@ public class ReportController {
     private ReportService reportService;
 
     @GetMapping("/pdf")
-    public void generatePDFReport() { reportService.generatePDFReport(); }
+    public void generatePDFReport() {
+        reportService.generatePDFReport();
+    }
 
     @GetMapping("/csv")
-    public void generateCSVReport() { reportService.generateCSVReport(); }
+    public void generateCSVReport() {
+        reportService.generateCSVReport();
+    }
 }

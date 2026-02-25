@@ -5,6 +5,7 @@ import com.yaqazah.detection.model.DetectionType;
 import com.yaqazah.detection.repository.DetectionLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.UUID;
 
 @Service
@@ -14,7 +15,10 @@ public class DetectionService {
 
     private UUID sessionId;
 
-    public void startDetection(UUID sessionId) { this.sessionId = sessionId; /* Logic */ }
+    public void startDetection(UUID sessionId) {
+        this.sessionId = sessionId; /* Logic */
+    }
+
     public void endDetection() { /* Logic */ }
 
     public DetectionLog log(String time, DetectionType type, Object frame) {
