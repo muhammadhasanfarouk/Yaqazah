@@ -18,6 +18,7 @@ public class SessionController {
     @Autowired
     private SessionService sessionService;
 
+    // START creates a new session, so POST is perfect here!
     @Operation(summary = "Start a new driving session", description = "Creates and starts a new session for the specified driver using their User ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Session started successfully"),
@@ -29,35 +30,38 @@ public class SessionController {
         sessionService.startSession(driverId);
     }
 
+    // PAUSE is a partial update, so we use PATCH
     @Operation(summary = "Pause an active session", description = "Pauses an ongoing driving session using the unique Session ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Session paused successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden (Requires DRIVER role)"),
             @ApiResponse(responseCode = "404", description = "Session not found")
     })
-    @PutMapping("/pause/{sessionId}")
+    @PatchMapping("/pause/{sessionId}")
     public void pauseSession(@PathVariable UUID sessionId) {
         sessionService.pauseSession(sessionId);
     }
 
+    // RESUME is a partial update, so we use PATCH
     @Operation(summary = "Resume a paused session", description = "Resumes a previously paused driving session.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Session resumed successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden (Requires DRIVER role)"),
             @ApiResponse(responseCode = "404", description = "Session not found")
     })
-    @PutMapping("/resume/{sessionId}")
+    @PatchMapping("/resume/{sessionId}")
     public void resumeSession(@PathVariable UUID sessionId) {
         sessionService.resumeSession(sessionId);
     }
 
+    // END is a partial update, so we use PATCH
     @Operation(summary = "End a session", description = "Ends an active or paused driving session permanently.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Session ended successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden (Requires DRIVER role)"),
             @ApiResponse(responseCode = "404", description = "Session not found")
     })
-    @PutMapping("/end/{sessionId}")
+    @PatchMapping("/end/{sessionId}")
     public void endSession(@PathVariable UUID sessionId) {
         sessionService.endSession(sessionId);
     }
