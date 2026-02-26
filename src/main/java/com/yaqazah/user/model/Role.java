@@ -1,6 +1,7 @@
 package com.yaqazah.user.model;
 
 public enum Role {
-    DRIVER,
-    COMPANYADM
+    ADMIN,
+    COMPANYADMIN,
+    DRIVER
 }
