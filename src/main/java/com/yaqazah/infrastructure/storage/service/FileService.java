@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -26,6 +27,44 @@ public class FileService {
     /**
      * Upload Base64 image (Used for automated screenshot capturing)
      */
+
+
+    public String uploadImage(MultipartFile file, String fileName) {
+        try {
+            if (file.isEmpty()) {
+                throw new IllegalArgumentException("File is empty.");
+            }
+
+            if (!"image/jpeg".equals(file.getContentType())) {
+                throw new IllegalArgumentException("Only JPEG images are allowed.");
+            }
+
+            String originalName = Objects.requireNonNull(file.getOriginalFilename());
+            String extension = originalName.substring(originalName.lastIndexOf('.'));
+
+            // Append the extension if the caller didn't include one
+            if (!fileName.endsWith(extension)) {
+                fileName += extension;
+            }
+
+            BlobContainerClient containerClient =
+                    blobServiceClient.getBlobContainerClient(containerName);
+
+            BlobClient blobClient = containerClient.getBlobClient(fileName);
+
+            blobClient.upload(file.getInputStream(), file.getSize(), true);
+
+            blobClient.setHttpHeaders(
+                    new BlobHttpHeaders().setContentType(file.getContentType())
+            );
+
+            return blobClient.getBlobUrl();
+
+        } catch (IOException e) {
+            throw new RuntimeException("Azure upload failed", e);
+        }
+    }
+
     public String uploadBase64(String base64String, String fileName) {
         try {
             String cleanBase64 = base64String.contains(",")
@@ -56,35 +95,50 @@ public class FileService {
     /**
      * Upload MultipartFile (Used for standard web forms uploads)
      */
-    public String uploadFile(MultipartFile file) {
-        try {
-            BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(containerName);
-
-            // Generate unique name to prevent collisions
-            String filename = UUID.randomUUID() + "-" + file.getOriginalFilename();
-            BlobClient blobClient = containerClient.getBlobClient(filename);
-
-            blobClient.upload(file.getInputStream(), file.getSize(), true);
-
-            // Match browser visibility headers
-            BlobHttpHeaders headers = new BlobHttpHeaders().setContentType(file.getContentType());
-            blobClient.setHttpHeaders(headers);
-
-            return blobClient.getBlobUrl();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Azure upload failed", e);
-        }
-    }
+//    public String uploadFile(MultipartFile file) {
+//        try {
+//            BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(containerName);
+//
+//            // Generate unique name to prevent collisions
+//            String filename = UUID.randomUUID() + "-" + file.getOriginalFilename();
+//            BlobClient blobClient = containerClient.getBlobClient(filename);
+//
+//            blobClient.upload(file.getInputStream(), file.getSize(), true);
+//
+//            // Match browser visibility headers
+//            BlobHttpHeaders headers = new BlobHttpHeaders().setContentType(file.getContentType());
+//            blobClient.setHttpHeaders(headers);
+//
+//            return blobClient.getBlobUrl();
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException("Azure upload failed", e);
+//        }
+//    }
 
     /**
      * Delete image
      */
-    public void deleteFile(String fileName) {
-        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(containerName);
-        BlobClient blobClient = containerClient.getBlobClient(fileName);
-        blobClient.deleteIfExists();
-    }
+//
+//    public void deleteImage(String fileName) {
+//
+//        BlobContainerClient containerClient =
+//                blobServiceClient.getBlobContainerClient(containerName);
+//
+//        BlobClient blobClient = containerClient.getBlobClient(fileName);
+//
+//        if (!blobClient.exists()) {
+//            throw new IllegalArgumentException("File not found.");
+//        }
+//
+//        blobClient.delete();
+//    }
+
+//    public void deleteFile(String fileName) {
+//        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(containerName);
+//        BlobClient blobClient = containerClient.getBlobClient(fileName);
+//        blobClient.deleteIfExists();
+//    }
 }
 
 //package com.yaqazah.infrastructure.storage.service;

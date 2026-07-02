@@ -3,6 +3,8 @@ package com.yaqazah.user.repository;
 import com.yaqazah.report.dto.DriverSessionReportDto;
 import com.yaqazah.user.model.Role;
 import com.yaqazah.user.model.User;
+import com.yaqazah.user.model.UserStatus;
+import com.yaqazah.company.model.Company;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +26,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findByEmailIncludingDeleted(@Param("email") String email);
 
     long countByRole(Role role);
+
+    boolean existsByCompany(Company company);
 
     Optional<User> findFirstByRoleOrderByInsertedAtAsc(Role role);
 
@@ -66,6 +70,11 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     List<User> findByCompany_CompanyIdAndRoleIncludingDeleted(
             @Param("companyId") UUID companyId,
             @Param("role") Role role
+    );
+
+    List<User> findByStatusAndInsertedAtBefore(
+            UserStatus status,
+            Instant cutoff
     );
 
     boolean existsByEmail(String email);
