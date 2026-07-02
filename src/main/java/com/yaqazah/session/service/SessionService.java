@@ -70,7 +70,7 @@ public class SessionService {
         UUID userId = user.getUserId();
 
         // 2. Compute duration: use frontend-provided value (double hours)
-        double durationHours = request.getSession().getDuration();
+        double durationHours = (request.getSession().getDuration())/3600;
 
         // 3. Count total alerts: logs where alertId >= 0 (exclude session start/end events with alertId = -1)
         List<LogPayload> logs = request.getLogs() != null ? request.getLogs() : new ArrayList<>();
