@@ -316,10 +316,16 @@ public class UserDriverAnalyticsService  {
     // =========================================================================
 
     private List<RiskDistributionDto> buildRiskDistribution(long[] riskBuckets) {
+        long total = riskBuckets[0] + riskBuckets[1] + riskBuckets[2];
+
+        long val0 = total == 0 ? 0 : Math.round((riskBuckets[0] * 100.0) / total);
+        long val1 = total == 0 ? 0 : Math.round((riskBuckets[1] * 100.0) / total);
+        long val2 = total == 0 ? 0 : Math.round((riskBuckets[2] * 100.0) / total);
+
         return List.of(
-                RiskDistributionDto.builder().id(0).value(riskBuckets[0]).build(),
-                RiskDistributionDto.builder().id(1).value(riskBuckets[1]).build(),
-                RiskDistributionDto.builder().id(2).value(riskBuckets[2]).build()
+                RiskDistributionDto.builder().id(0).value(val0).build(),
+                RiskDistributionDto.builder().id(1).value(val1).build(),
+                RiskDistributionDto.builder().id(2).value(val2).build()
         );
     }
 
