@@ -440,12 +440,27 @@ public class NewAdminDriversAnalyticsService {
             UUID sid = (UUID) row[0];
             bucketCounts[riskLevel(sessionSafetyScore(sid))]++;
         }
+
+        // Calculate the total number of sessions
+        long totalSessions = sessions.size();
+
         List<RiskDistributionDto> out = new ArrayList<>();
         for (int level = 0; level < 3; level++) {
-            out.add(RiskDistributionDto.builder().id(level).value(bucketCounts[level]).build());
+            // Calculate percentage, guarding against division by zero
+            long percentage = 0;
+            if (totalSessions > 0) {
+                // Using Math.round to get accurate rounding for the percentage
+                percentage = Math.round((bucketCounts[level] * 100.0) / totalSessions);
+            }
+
+            out.add(RiskDistributionDto.builder()
+                    .id(level)
+                    .value(percentage) // Return percentage instead of raw count
+                    .build());
         }
         return out;
     }
+
 
     private OverviewStatDto overviewStat(String label, long current, long previous, boolean asPercent) {
         return overviewStat(label, (double) current, (double) previous, asPercent, false);
