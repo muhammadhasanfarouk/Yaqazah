@@ -1,10 +1,10 @@
 package com.yaqazah.user.repository;
 
+import com.yaqazah.company.model.Company;
 import com.yaqazah.report.dto.DriverSessionReportDto;
 import com.yaqazah.user.model.Role;
 import com.yaqazah.user.model.User;
 import com.yaqazah.user.model.UserStatus;
-import com.yaqazah.company.model.Company;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,6 +38,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     void deleteByCompany_CompanyIdAndRole(UUID companyId, Role role);
 
     boolean existsByCompany_CompanyIdAndRoleAndIsDeletedFalse(UUID companyId, Role role);
+
     long countByCompany_CompanyIdAndRoleAndIsDeletedFalse(
             UUID companyId,
             Role role
@@ -62,11 +63,11 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     );
 
     @Query("""
-       SELECT u
-       FROM User u
-       WHERE u.company.companyId = :companyId
-       AND u.role = :role
-       """)
+            SELECT u
+            FROM User u
+            WHERE u.company.companyId = :companyId
+            AND u.role = :role
+            """)
     List<User> findByCompany_CompanyIdAndRoleIncludingDeleted(
             @Param("companyId") UUID companyId,
             @Param("role") Role role

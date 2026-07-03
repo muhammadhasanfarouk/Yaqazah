@@ -1,27 +1,25 @@
 package com.yaqazah.user.service;
 
 import com.yaqazah.common.util.PasswordGeneratorUtil;
-import com.yaqazah.company.model.Company;
 import com.yaqazah.company.service.CompanyService;
 import com.yaqazah.infrastructure.email.NotificationService;
 import com.yaqazah.user.dto.request.CompanyAdminDto;
-import com.yaqazah.user.dto.request.CompanyOwnerRegistrationDto;
-import com.yaqazah.user.dto.request.FleetDriverDto;
 import com.yaqazah.user.model.Role;
 import com.yaqazah.user.model.User;
 import com.yaqazah.user.model.UserStatus;
 import com.yaqazah.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NullMarked;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Caching;
-
 
 import java.util.UUID;
 
 @Service
+@NullMarked
 @RequiredArgsConstructor
 public class AdminService {
 
@@ -51,7 +49,8 @@ public class AdminService {
 //        // 2. Create the Company
 //        Company newCompany = new Company();
 //        newCompany.setName(req.getCompanyName());
-////        newCompany.setAddress(req.getCompanyAddress());
+
+    /// /        newCompany.setAddress(req.getCompanyAddress());
 //
 //        Company savedCompany = companyService.createCompany(newCompany);
 //
@@ -69,17 +68,16 @@ public class AdminService {
 //        // 4. Save to DB
 //        userRepository.save(newAdmin);
 //    }
-
     @Transactional
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public void addCompanyAdmin(CompanyAdminDto req, String adminEmail) {
         if (userRepository.findByEmail(req.getEmail()).isPresent()) {
@@ -137,14 +135,14 @@ public class AdminService {
 
     @Transactional
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public void swapOwnership(String currentAdminEmail, String targetEmail) {
 
@@ -179,14 +177,14 @@ public class AdminService {
 
     @Transactional
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public void deleteCompanyAdminByEmail(String requesterEmail, String targetAdminEmail) {
         // 1. Fetch the requester's company ID (Fixed: Changed Long to UUID)

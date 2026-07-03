@@ -1,6 +1,5 @@
 package com.yaqazah.user.controller;
 
-import com.yaqazah.user.dto.request.FleetDriverDto;
 import com.yaqazah.user.dto.request.UpdateFleetDriverDto;
 import com.yaqazah.user.service.CompanyAdminService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,15 +20,14 @@ import java.util.UUID;
 @RequestMapping("/api/company/drivers")
 @PreAuthorize("hasRole('COMPANY_ADMIN')")
 @RequiredArgsConstructor
-@Tag(name="Company Drivers")
+@Tag(name = "Company Drivers")
 public class CompanyAdminController {
 
 
     private final CompanyAdminService service;
 
 
-
-    private String email(){
+    private String email() {
 
         Authentication auth =
                 SecurityContextHolder
@@ -38,7 +36,6 @@ public class CompanyAdminController {
 
         return auth.getName();
     }
-
 
 
 //    @PostMapping("/add")
@@ -58,7 +55,7 @@ public class CompanyAdminController {
     public ResponseEntity<String> edit(
             @PathVariable UUID id,
             @Valid @RequestBody UpdateFleetDriverDto dto
-    ){
+    ) {
 
         service.updateFleetDriver(
                 id,

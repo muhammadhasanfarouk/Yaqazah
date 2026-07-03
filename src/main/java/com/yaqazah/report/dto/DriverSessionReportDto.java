@@ -18,4 +18,5 @@ public record DriverSessionReportDto(
         Integer riskId,
         String title,
         String subtitle
-) {}
+) {
+}

@@ -1,12 +1,6 @@
 package com.yaqazah.dashboard.service;
 
-import com.yaqazah.dashboard.dto.AlertTrendValueDto;
-import com.yaqazah.dashboard.dto.DashboardResponseDto;
-import com.yaqazah.dashboard.dto.OverviewStatDto;
-import com.yaqazah.dashboard.dto.PieDistributionDto;
-import com.yaqazah.dashboard.dto.RecentSessionDto;
-import com.yaqazah.dashboard.dto.RiskDistributionDto;
-import com.yaqazah.dashboard.dto.TopPerformerDto;
+import com.yaqazah.dashboard.dto.*;
 import com.yaqazah.dashboard.repository.DashboardRepository;
 import com.yaqazah.dashboard.util.DashboardFilterResolver;
 import com.yaqazah.dashboard.util.DashboardFilterResolver.DateRange;
@@ -22,7 +16,6 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class NewDashboardService {
@@ -178,7 +171,7 @@ public class NewDashboardService {
         long inclusiveDays = ChronoUnit.DAYS.between(fromDate, toDate) + 1;
         LocalDate previousEnd = fromDate.minusDays(1);
         LocalDate previousStart = previousEnd.minusDays(inclusiveDays - 1);
-        return new LocalDate[] { previousStart, previousEnd };
+        return new LocalDate[]{previousStart, previousEnd};
     }
 
     private String startOfDayUtcIso(LocalDate day) {

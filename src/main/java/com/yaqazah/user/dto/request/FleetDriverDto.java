@@ -2,7 +2,10 @@ package com.yaqazah.user.dto.request;
 
 import com.yaqazah.user.model.Gender;
 import jakarta.validation.constraints.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -25,6 +28,7 @@ public class FleetDriverDto {
 
     @Past
     private LocalDate birthDate;
+
     @AssertTrue(message = "Must be at least 18")
     public boolean isAdult() {
         return birthDate != null &&

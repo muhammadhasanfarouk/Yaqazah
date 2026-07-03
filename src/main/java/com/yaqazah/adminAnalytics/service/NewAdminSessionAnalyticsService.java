@@ -6,7 +6,6 @@ import com.yaqazah.dashboard.dto.OverviewStatDto;
 import com.yaqazah.dashboard.util.DashboardFilterResolver;
 import com.yaqazah.user.model.Role;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +27,8 @@ public class NewAdminSessionAnalyticsService {
             UUID entityId,
             double durationHours,
             long low, long medium, long high, long critical
-    ) {}
+    ) {
+    }
 
     private final AdminAnalyticsRepository repository;
 

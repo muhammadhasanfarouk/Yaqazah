@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NullMarked;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Caching;
 
 
 @NullMarked
@@ -44,14 +44,14 @@ public class AuthController {
 
     @PostMapping("/register-owner")
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public ResponseEntity<?> registerOwner(
             @Valid @RequestBody CompanyOwnerRegistrationDto request
@@ -66,14 +66,14 @@ public class AuthController {
 
     @PostMapping("/verify-email")
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public ResponseEntity<?> verifyEmail(
             @Valid @RequestBody VerifyEmailDto request

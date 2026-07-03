@@ -1,10 +1,10 @@
 package com.yaqazah.adminAnalytics.service;
 
-import com.yaqazah.adminAnalytics.repository.AdminAnalyticsRepository;
 import com.yaqazah.adminAnalytics.dto.DriverDetailResponseDto;
 import com.yaqazah.adminAnalytics.dto.DriverSummaryDto;
 import com.yaqazah.adminAnalytics.dto.DriversListResponseDto;
 import com.yaqazah.adminAnalytics.dto.SessionSummaryDto;
+import com.yaqazah.adminAnalytics.repository.AdminAnalyticsRepository;
 import com.yaqazah.dashboard.dto.AlertTrendValueDto;
 import com.yaqazah.dashboard.dto.OverviewStatDto;
 import com.yaqazah.dashboard.dto.PieDistributionDto;
@@ -39,14 +39,17 @@ public class NewAdminDriversAnalyticsService {
     private static final double K_FACTOR = 0.025;
     private static final double MIN_TRIP_HOURS = 0.0833; // 5-minute threshold
 
-    public enum TrendGranularity { HOURLY, DAILY, MONTHLY, YEARLY }
-    private record TrendResolution(TrendGranularity granularity, List<String> sqlKeys, List<String> displayLabels) {}
+    public enum TrendGranularity {HOURLY, DAILY, MONTHLY, YEARLY}
+
+    private record TrendResolution(TrendGranularity granularity, List<String> sqlKeys, List<String> displayLabels) {
+    }
 
     private record DensityMetric(
             UUID entityId,
             double durationHours,
             long low, long medium, long high, long critical
-    ) {}
+    ) {
+    }
 
     private final AdminAnalyticsRepository repository;
     private final UserRepository userRepository;

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,7 @@ import java.util.function.Function;
 
 @RequiredArgsConstructor
 @RestController
+@NullMarked
 @RequestMapping("/api/user/analytics")
 @Tag(name = "Analytics", description = "Endpoints for retrieving INDEPENDENT_DRIVER analytics and statistics.")
 public class AnalyticsController {
@@ -30,7 +32,6 @@ public class AnalyticsController {
     private final NewUserAnalyticsService newUserAnalyticsService;
     private final UserDriverAnalyticsService driverService;
     private final UserRepository userRepository;
-
 
 
     @Operation(summary = "List sessions", description = "Sessions and overview stats for the authenticated INDEPENDENT_DRIVER.")

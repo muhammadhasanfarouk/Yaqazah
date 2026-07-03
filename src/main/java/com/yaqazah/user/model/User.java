@@ -7,13 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLRestriction;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
-import java.time.Instant;
-import org.hibernate.annotations.CreationTimestamp;
-
-import org.hibernate.annotations.SQLRestriction;
 
 @Setter
 @Getter

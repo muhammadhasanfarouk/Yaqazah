@@ -4,7 +4,6 @@ import com.yaqazah.adminAnalytics.dto.*;
 import com.yaqazah.dashboard.dto.OverviewStatDto;
 import com.yaqazah.dashboard.util.DashboardFilterResolver;
 import com.yaqazah.userAnalytics.repository.UserAnalyticsRepository;
-
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +26,8 @@ public class NewUserAnalyticsService {
             UUID entityId,
             double durationHours,
             long low, long medium, long high, long critical
-    ) {}
+    ) {
+    }
 
     private final UserAnalyticsRepository repository;
 

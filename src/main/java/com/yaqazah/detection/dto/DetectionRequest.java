@@ -1,9 +1,12 @@
 package com.yaqazah.detection.dto;
 
 //import com.yaqazah.detection.model.AlertType;
+
 import com.yaqazah.detection.model.DetectionType;
-//import com.yaqazah.detection.model.RiskId;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
 @Data // This automatically adds Getters, Setters, and RequiredArgsConstructor

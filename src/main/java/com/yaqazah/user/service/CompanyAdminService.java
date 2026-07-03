@@ -1,21 +1,17 @@
 package com.yaqazah.user.service;
 
-import com.yaqazah.common.util.PasswordGeneratorUtil;
 import com.yaqazah.infrastructure.email.NotificationService;
-import com.yaqazah.user.dto.request.FleetDriverDto;
 import com.yaqazah.user.dto.request.UpdateFleetDriverDto;
 import com.yaqazah.user.model.Role;
 import com.yaqazah.user.model.User;
-import com.yaqazah.user.model.UserStatus;
 import com.yaqazah.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NullMarked;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Caching;
-
 
 import java.util.UUID;
 
@@ -57,14 +53,14 @@ public class CompanyAdminService {
 
     @Transactional
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public void updateFleetDriver(UUID driverId, UpdateFleetDriverDto updatedData, String adminEmail) {
         User loggedInAdmin = userRepository.findByEmail(adminEmail)

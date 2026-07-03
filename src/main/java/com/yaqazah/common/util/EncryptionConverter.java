@@ -4,11 +4,12 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.SecureRandom;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 @Component
@@ -58,18 +59,18 @@ public class EncryptionConverter implements AttributeConverter<String, String> {
         if (dbData == null) return null;
         try {
             byte[] cipherMessage = Base64.getDecoder().decode(dbData);
-            
+
             // For backward compatibility (if the data is from old ECB encryption without IV prepended)
             // The old encoded string was base64(ciphertext). If its length doesn't make sense for GCM (min 12 bytes + tag)
             // we could attempt to fallback, but since the user was warned, we will just try to decrypt via GCM.
-            
+
             // Extract the IV and ciphertext
             if (cipherMessage.length < GCM_IV_LENGTH) {
                 throw new IllegalArgumentException("Invalid ciphertext length");
             }
             byte[] iv = new byte[GCM_IV_LENGTH];
             System.arraycopy(cipherMessage, 0, iv, 0, iv.length);
-            
+
             byte[] cipherText = new byte[cipherMessage.length - GCM_IV_LENGTH];
             System.arraycopy(cipherMessage, GCM_IV_LENGTH, cipherText, 0, cipherText.length);
 

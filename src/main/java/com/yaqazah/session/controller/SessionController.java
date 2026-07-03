@@ -3,12 +3,12 @@ package com.yaqazah.session.controller;
 import com.yaqazah.session.dto.SessionUploadRequest;
 import com.yaqazah.session.model.Session;
 import com.yaqazah.session.service.SessionService;
-import com.yaqazah.user.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/sessions")
 @CrossOrigin(origins = "*")
 @Tag(name = "Driving Sessions", description = "Endpoint for uploading a completed driving session with all its detection logs.")
+@RequiredArgsConstructor
+@NullMarked
 public class SessionController {
 
-    @Autowired
-    private SessionService sessionService;
+    private final SessionService sessionService;
 
     @Operation(
             summary = "Upload a completed session",

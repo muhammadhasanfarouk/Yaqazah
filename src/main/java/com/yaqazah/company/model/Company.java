@@ -6,11 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.Instant;
 import java.util.UUID;
-
-import org.hibernate.annotations.SQLRestriction;
 
 @Setter
 @Getter
@@ -24,7 +23,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID companyId;
     private String name;
-//    private String address;
+    //    private String address;
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Instant insertedAt;

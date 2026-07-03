@@ -2,7 +2,6 @@ package com.yaqazah.company.service;
 
 import com.yaqazah.company.model.Company;
 import com.yaqazah.company.repository.CompanyRepository;
-import com.yaqazah.user.model.User;
 import com.yaqazah.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NullMarked;
@@ -10,9 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @NullMarked

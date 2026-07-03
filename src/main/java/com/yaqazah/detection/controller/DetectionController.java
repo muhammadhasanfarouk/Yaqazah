@@ -4,7 +4,8 @@ import com.yaqazah.adminAnalytics.dto.DetectionLogDto;
 import com.yaqazah.detection.model.DetectionLog;
 import com.yaqazah.detection.repository.DetectionLogRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +20,11 @@ import java.util.UUID;
 @RequestMapping("/api/detections")
 @CrossOrigin(origins = "*")
 @Tag(name = "Detections", description = "Read-only detection log endpoints.")
+@RequiredArgsConstructor
+@NullMarked
 public class DetectionController {
 
-    @Autowired
-    private DetectionLogRepository detectionLogRepo;
+    private final DetectionLogRepository detectionLogRepo;
 
     @GetMapping("/session/{sessionId}")
     public ResponseEntity<List<DetectionLogDto>> getSessionLogs(@PathVariable UUID sessionId) {

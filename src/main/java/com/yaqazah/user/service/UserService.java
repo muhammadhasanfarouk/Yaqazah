@@ -160,7 +160,6 @@ public class UserService {
                 break;
 
 
-
             case COMPANY_ADMIN:
 
                 Company company = user.getCompany();
@@ -243,7 +242,6 @@ public class UserService {
                 break;
 
 
-
             case COMPANY_ADMIN:
 
                 Company company = user.getCompany();
@@ -277,7 +275,6 @@ public class UserService {
                 }
 
                 break;
-
 
 
             case ADMIN:
@@ -345,7 +342,6 @@ public class UserService {
                 break;
         }
     }
-
 
 
     private void deleteCompanyData(Company company) {

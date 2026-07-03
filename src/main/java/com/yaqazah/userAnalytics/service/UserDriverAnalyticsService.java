@@ -18,7 +18,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
-public class UserDriverAnalyticsService  {
+public class UserDriverAnalyticsService {
 
     // ==========================================
     // SAFETY SCORE ALGORITHM CONFIGURATION
@@ -26,18 +26,22 @@ public class UserDriverAnalyticsService  {
     private static final double K_FACTOR = 0.025;
     private static final double MIN_TRIP_HOURS = 0.0833; // 5-minute threshold
 
-    public enum TrendGranularity { HOURLY, DAILY, MONTHLY, YEARLY }
-    private record TrendResolution(TrendGranularity granularity, List<String> sqlKeys, List<String> displayLabels) {}
+    public enum TrendGranularity {HOURLY, DAILY, MONTHLY, YEARLY}
+
+    private record TrendResolution(TrendGranularity granularity, List<String> sqlKeys, List<String> displayLabels) {
+    }
 
     private record DensityMetric(
             UUID entityId, double durationHours,
             long low, long medium, long high, long critical
-    ) {}
+    ) {
+    }
 
     private record TrendBucketMetric(
             String bucketKey, double durationHours,
             long low, long med, long high, long crit
-    ) {}
+    ) {
+    }
 
     private final UserAnalyticsRepository repository;
 

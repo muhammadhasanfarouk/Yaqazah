@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NullMarked;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -19,9 +21,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Caching;
-
 
 
 @NullMarked
@@ -39,7 +38,6 @@ public class UserController {
     private final UserService userService;
 
 
-
     private String getCurrentUserEmail() {
 
         Authentication authentication =
@@ -48,7 +46,7 @@ public class UserController {
                         .getAuthentication();
 
 
-        if(authentication == null ||
+        if (authentication == null ||
                 !authentication.isAuthenticated()) {
 
             throw new IllegalStateException(
@@ -83,17 +81,17 @@ public class UserController {
             summary = "Update Full Name"
     )
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public ResponseEntity<String> updateMyName(
-            @RequestBody Map<String,String> body
+            @RequestBody Map<String, String> body
     ) {
 
 
@@ -117,14 +115,14 @@ public class UserController {
             summary = "Delete My Account"
     )
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public ResponseEntity<String> deleteMyAccount() {
 
@@ -150,14 +148,14 @@ public class UserController {
             summary = "Restore Account"
     )
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public ResponseEntity<String> restoreAccount(
             @RequestBody LoginRequestDto request
@@ -189,14 +187,14 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN','COMPANY_ADMIN')")
     @Operation(summary = "Add fleet driver")
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public ResponseEntity<String> addFleetDriver(
             @Valid @RequestBody FleetDriverDto request
@@ -210,14 +208,14 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN','COMPANY_ADMIN')")
     @Operation(summary = "Delete driver by email")
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     public ResponseEntity<String> deleteDriver(
             @Valid @RequestBody DeleteUserRequestDto request

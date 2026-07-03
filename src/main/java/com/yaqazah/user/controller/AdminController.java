@@ -1,6 +1,8 @@
 package com.yaqazah.user.controller;
 
-import com.yaqazah.user.dto.request.*;
+import com.yaqazah.user.dto.request.CompanyAdminDto;
+import com.yaqazah.user.dto.request.DeleteUserRequestDto;
+import com.yaqazah.user.dto.request.SwapOwnershipDto;
 import com.yaqazah.user.service.AdminService;
 import com.yaqazah.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,11 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.UUID;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Caching;
-
-
 
 @NullMarked
 @RestController

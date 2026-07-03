@@ -29,7 +29,7 @@
 //@Component
 //@RequiredArgsConstructor
 //public class DatabaseSeeder implements CommandLineRunner {
-////use this as password for admins: $2a$10$ockpBu23D856jpBmJkwg8eyWgDuOZPaQcgAAoLbA445XDMcerEDna
+/// /use this as password for admins: $2a$10$ockpBu23D856jpBmJkwg8eyWgDuOZPaQcgAAoLbA445XDMcerEDna
 //    private final UserRepository userRepository;
 //    private final CompanyRepository companyRepository;
 //    private final SessionRepository sessionRepository;

@@ -15,7 +15,8 @@ public final class WeeklyAggregationUtil {
             List<String> trendLabels,
             List<Integer> performanceTrend,
             List<AlertTrendValueDto> alertTrendValues
-    ) {}
+    ) {
+    }
 
     public static WeeklyAggregationResult aggregateMonthToWeeks(
             List<String> dailyLabels,
@@ -33,7 +34,7 @@ public final class WeeklyAggregationUtil {
 
         List<String> weeklyLabels = new ArrayList<>();
         List<Integer> weeklyPerformance = performanceTrend != null ? new ArrayList<>() : null;
-        
+
         int numAlertTypes = alertTrendValues.size();
         List<List<Long>> newAlertValues = new ArrayList<>(numAlertTypes);
         for (int i = 0; i < numAlertTypes; i++) {
@@ -42,7 +43,7 @@ public final class WeeklyAggregationUtil {
 
         for (int start = 0; start < numDays; start += 7) {
             int end = Math.min(start + 7, numDays);
-            
+
             // 1. Label: "Week 1", "Week 2", etc.
             weeklyLabels.add("Week " + ((start / 7) + 1));
 

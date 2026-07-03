@@ -2,17 +2,17 @@ package com.yaqazah.session.service;
 
 import com.yaqazah.detection.model.DetectionLog;
 import com.yaqazah.detection.repository.DetectionLogRepository;
+import com.yaqazah.infrastructure.storage.service.FileService;
 import com.yaqazah.session.dto.LogPayload;
 import com.yaqazah.session.dto.SessionUploadRequest;
 import com.yaqazah.session.model.Session;
 import com.yaqazah.session.repository.SessionRepository;
-import com.yaqazah.user.model.User;
 import com.yaqazah.user.model.Role;
+import com.yaqazah.user.model.User;
 import com.yaqazah.user.repository.UserRepository;
-import com.yaqazah.infrastructure.storage.service.FileService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,29 +22,23 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class SessionService {
 
-    @Autowired
-    private SessionRepository sessionRepository;
-
-    @Autowired
-    private DetectionLogRepository detectionLogRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private FileService fileService;
+    private final SessionRepository sessionRepository;
+    private final DetectionLogRepository detectionLogRepository;
+    private final UserRepository userRepository;
+    private final FileService fileService;
 
     @Caching(evict = {
-            @CacheEvict(value = "dashboard",              allEntries = true),
-            @CacheEvict(value = "admin:sessions",         allEntries = true),
-            @CacheEvict(value = "admin:session-detail",   allEntries = true),
-            @CacheEvict(value = "admin:drivers",          allEntries = true),
-            @CacheEvict(value = "admin:driver-detail",    allEntries = true),
-            @CacheEvict(value = "user:analytics",         allEntries = true),
-            @CacheEvict(value = "user:sessions",          allEntries = true),
-            @CacheEvict(value = "user:session-detail",    allEntries = true)
+            @CacheEvict(value = "dashboard", allEntries = true),
+            @CacheEvict(value = "admin:sessions", allEntries = true),
+            @CacheEvict(value = "admin:session-detail", allEntries = true),
+            @CacheEvict(value = "admin:drivers", allEntries = true),
+            @CacheEvict(value = "admin:driver-detail", allEntries = true),
+            @CacheEvict(value = "user:analytics", allEntries = true),
+            @CacheEvict(value = "user:sessions", allEntries = true),
+            @CacheEvict(value = "user:session-detail", allEntries = true)
     })
     @Transactional
     public Session uploadSession(SessionUploadRequest request, String authenticatedUserEmail) {
@@ -70,7 +64,7 @@ public class SessionService {
         UUID userId = user.getUserId();
 
         // 2. Compute duration: use frontend-provided value (double hours)
-        double durationHours = (request.getSession().getDuration())/3600;
+        double durationHours = (request.getSession().getDuration()) / 3600;
 
         // 3. Count total alerts: logs where alertId >= 0 (exclude session start/end events with alertId = -1)
         List<LogPayload> logs = request.getLogs() != null ? request.getLogs() : new ArrayList<>();

@@ -14,7 +14,7 @@ import java.time.Instant;
 public class CompanyInfoDto {
     // --- Company Details ---
     private String companyName;
-//    private String companyAddress;
+    //    private String companyAddress;
     private int totalAdmins;
     private Instant companyInsertedAt;
 

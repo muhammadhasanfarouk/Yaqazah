@@ -13,7 +13,7 @@ public class DriverSummaryDto {
     private String name;
     private String id;
     private String email;
-//    private String phone;
+    //    private String phone;
     private int riskId;
     private int safetyScore;
     private long totalSessions;

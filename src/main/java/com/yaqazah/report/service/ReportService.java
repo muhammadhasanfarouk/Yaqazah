@@ -11,9 +11,9 @@ import com.yaqazah.dashboard.dto.RiskDistributionDto;
 import com.yaqazah.dashboard.service.NewDashboardService;
 import com.yaqazah.report.dto.DriverSessionReportDto;
 import com.yaqazah.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -23,19 +23,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ReportService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private NewDashboardService newDashboardService;
-
-    @Autowired
-    private NewAdminSessionAnalyticsService newAdminSessionAnalyticsService;
-
-    @Autowired
-    private NewAdminDriversAnalyticsService newAdminDriversAnalyticsService;
+    private final UserRepository userRepository;
+    private final NewDashboardService newDashboardService;
+    private final NewAdminSessionAnalyticsService newAdminSessionAnalyticsService;
+    private final NewAdminDriversAnalyticsService newAdminDriversAnalyticsService;
 
     @Cacheable(value = "reports:combined", key = "#companyId")
     public String generateCSVReport(UUID companyId) {
