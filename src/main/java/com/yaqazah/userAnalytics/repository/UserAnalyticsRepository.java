@@ -75,13 +75,13 @@ public interface UserAnalyticsRepository extends JpaRepository<DetectionLog, UUI
   List<Object[]> findLogsForSession(@Param("sessionId") UUID sessionId);
 
   @Query("""
-      select d.alertId, count(d)
+      select d.riskId, count(d)
       from DetectionLog d
       join d.session s
       join User u on s.userId = u.userId
       where d.session.sessionId = :sessionId
-        and d.alertId >= 0
-      group by d.alertId
+        and d.riskId >= 0
+      group by d.riskId
       """)
   List<Object[]> countAlertsByTypeForSession(@Param("sessionId") UUID sessionId);
 
