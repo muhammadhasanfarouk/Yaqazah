@@ -87,6 +87,15 @@ public class UserDriverAnalyticsService  {
 
         List<Integer> performanceTrend = buildPerformanceTrend(userId, curStartIso, curEndExcl, resolution);
         List<AlertTrendValueDto> alertTrendValues = buildUserAlertTrendValues(userId, curStartIso, curEndExcl, resolution);
+        List<String> trendLabels = resolution.displayLabels();
+
+        if ("4".equals(DashboardFilterResolver.toFilterId(filter))) {
+            com.yaqazah.dashboard.util.WeeklyAggregationUtil.WeeklyAggregationResult aggregated = com.yaqazah.dashboard.util.WeeklyAggregationUtil.aggregateMonthToWeeks(
+                    trendLabels, performanceTrend, alertTrendValues);
+            performanceTrend = aggregated.performanceTrend();
+            alertTrendValues = aggregated.alertTrendValues();
+            trendLabels = aggregated.trendLabels();
+        }
 
         return UserAnalyticsResponseDto.builder()
                 .filterId(DashboardFilterResolver.toFilterId(filter))
@@ -96,7 +105,7 @@ public class UserDriverAnalyticsService  {
                 .alertTrendValues(alertTrendValues)
                 .pieDistribution(pieDistribution)
                 .riskDistribution(riskDistribution)
-                .trendLabels(resolution.displayLabels())
+                .trendLabels(trendLabels)
                 .build();
     }
 

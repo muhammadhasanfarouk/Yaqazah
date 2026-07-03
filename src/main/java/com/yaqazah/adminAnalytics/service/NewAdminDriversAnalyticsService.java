@@ -233,6 +233,15 @@ public class NewAdminDriversAnalyticsService {
         List<AlertTrendValueDto> alertTrendValues = buildDriverAlertTrendValues(driverId, curStartIso, curEndExcl, resolution);
         List<PieDistributionDto> pieDistribution = buildDriverPieDistribution(driverId, curStartIso, curEndExcl);
         List<RiskDistributionDto> riskDistribution = buildDriverRiskDistribution(sessionsInPeriod);
+        List<String> trendLabels = resolution.displayLabels();
+
+        if ("4".equals(DashboardFilterResolver.toFilterId(filter))) {
+            com.yaqazah.dashboard.util.WeeklyAggregationUtil.WeeklyAggregationResult aggregated = com.yaqazah.dashboard.util.WeeklyAggregationUtil.aggregateMonthToWeeks(
+                    trendLabels, performanceTrend, alertTrendValues);
+            performanceTrend = aggregated.performanceTrend();
+            alertTrendValues = aggregated.alertTrendValues();
+            trendLabels = aggregated.trendLabels();
+        }
 
         return Optional.of(DriverDetailResponseDto.builder()
                 .filterId(DashboardFilterResolver.toFilterId(filter))
@@ -248,7 +257,7 @@ public class NewAdminDriversAnalyticsService {
                 .pieDistribution(pieDistribution)
                 .riskDistribution(riskDistribution)
                 .sessions(sessions)
-                .trendLabels(resolution.displayLabels())
+                .trendLabels(trendLabels)
                 .build());
     }
 

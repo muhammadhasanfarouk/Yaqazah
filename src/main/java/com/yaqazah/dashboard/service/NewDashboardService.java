@@ -107,6 +107,14 @@ public class NewDashboardService {
         List<RiskDistributionDto> riskDistribution = buildRiskDistribution(companyId, curStartIso, curEndExcl);
         List<RecentSessionDto> recentSessions = buildRecentSessions(companyId);
         List<TopPerformerDto> topPerformers = buildTopPerformers(companyId, curStartIso, curEndExcl);
+        List<String> trendLabels = resolution.displayLabels();
+
+        if ("4".equals(apiFilterId)) {
+            com.yaqazah.dashboard.util.WeeklyAggregationUtil.WeeklyAggregationResult aggregated = com.yaqazah.dashboard.util.WeeklyAggregationUtil.aggregateMonthToWeeks(
+                    trendLabels, null, alertTrendValues);
+            alertTrendValues = aggregated.alertTrendValues();
+            trendLabels = aggregated.trendLabels();
+        }
 
         return DashboardResponseDto.builder()
                 .filterId(DashboardFilterResolver.toFilterId(filter))
@@ -117,7 +125,7 @@ public class NewDashboardService {
                 .riskDistribution(riskDistribution)
                 .recentSessions(recentSessions)
                 .topPerformers(topPerformers)
-                .trendLabels(resolution.displayLabels())
+                .trendLabels(trendLabels)
                 .build();
     }
 
