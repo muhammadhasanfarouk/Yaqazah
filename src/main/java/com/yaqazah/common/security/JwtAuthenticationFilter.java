@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -59,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             List<String> roles = jwtUtil.extractRoles(jwt);
 
             if (roles == null) {
-                roles = Collections.emptyList();
+                roles = java.util.Collections.emptyList();
             }
 
             List<SimpleGrantedAuthority> authorities = roles.stream()
@@ -76,18 +75,43 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if (jwtUtil.validateToken(jwt, userDetails)) {
 
-                UsernamePasswordAuthenticationToken authentication =
+                String client = jwtUtil.extractClient(jwt);
+                String requestURI = request.getRequestURI();
+
+                if (requestURI.startsWith("/api/web/")
+                        && !"web".equals(client)) {
+
+                    response.sendError(
+                            HttpServletResponse.SC_FORBIDDEN,
+                            "Web token required."
+                    );
+                    return;
+                }
+
+                if (requestURI.startsWith("/api/mobile/")
+                        && !"mobile".equals(client)) {
+
+                    response.sendError(
+                            HttpServletResponse.SC_FORBIDDEN,
+                            "Mobile token required."
+                    );
+                    return;
+                }
+
+                UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,
                                 null,
                                 authorities
                         );
 
-                authentication.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request)
+                auth.setDetails(
+                        new WebAuthenticationDetailsSource()
+                                .buildDetails(request)
                 );
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext()
+                        .setAuthentication(auth);
             }
         }
 
