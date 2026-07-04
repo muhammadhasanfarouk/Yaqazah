@@ -1,5 +1,6 @@
 package com.yaqazah.detection.model;
 
+import com.yaqazah.common.util.EncryptionConverter;
 import com.yaqazah.session.model.Session;
 import com.yaqazah.user.model.User;
 import jakarta.persistence.*;
@@ -36,7 +37,8 @@ public class DetectionLog {
     private int alertId;
     private int riskId;
 
-    @Column(columnDefinition = "TEXT")
+    @Convert(converter = EncryptionConverter.class)
+//    @Column(columnDefinition = "TEXT")
     private String snapshotUrl;
 
     private String insertionTimestamp;
