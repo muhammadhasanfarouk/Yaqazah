@@ -55,7 +55,7 @@ jwt:
   expiration: ${JWT_EXPIRATION:86400000}
 
 encryption:
-  key: ${DB_ENCRYPTION_KEY:my-32-char-ultra-secret-key-12345}
+  key: ${DB_ENCRYPTION_KEY:my-32-char-ultra-secret-key-1234}
 
 #minio:
 #  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
